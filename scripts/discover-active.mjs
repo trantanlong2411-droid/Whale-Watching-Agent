@@ -17,14 +17,16 @@ try{
     for(const log of logs){
      const found=decodeTransfer(log,t);
      if(!found)continue;
-     if(t.symbol==='USDC'&&BigInt(found.amountRaw)<1000n*1000000n)continue;
-     if(t.symbol==='WPROS'&&BigInt(found.amountRaw)<1000n*10n**18n)continue;
-     if(t.symbol==='WETH'&&BigInt(found.amountRaw)<10n**18n)continue;
+     if(t.symbol==='USDC'&&BigInt(found.amountRaw)<1000000n)continue;
+     if(t.symbol==='WPROS'&&BigInt(found.amountRaw)<10n**18n)continue;
+     if(t.symbol==='WETH'&&BigInt(found.amountRaw)<10n**14n)continue;
      observed.push({...found});
     }
    }catch(e){console.log('ACTIVE_DISCOVERY_WINDOW_ERROR',JSON.stringify({asset:t.symbol,fromBlock,error:String(e.message||e).slice(0,230)}));}
   }
  }
+ const biggest=[...observed].sort((a,b)=>BigInt(b.amountRaw)>BigInt(a.amountRaw)?1:BigInt(b.amountRaw)<BigInt(a.amountRaw)?-1:0)
+  .slice(0,20).map(v=>({token:v.token,amount:v.amount,block:v.blockNumber,hash:v.hash,from:v.from,to:v.to}));
  const owners=new Map();
  for(const e of observed){
   for(const a of [e.from,e.to]){
@@ -37,5 +39,5 @@ try{
  const top=[...owners.values()].sort((a,b)=>Number(b.usdcMoved>a.usdcMoved)-Number(b.usdcMoved<a.usdcMoved)||b.count-a.count)
   .slice(0,15).map(v=>({address:v.address,count:v.count,usdcMoved:v.usdcMoved.toString(),
   sample:v.events.slice(0,2)}));
- console.log('ACTIVE_DISCOVERY_RESULT',JSON.stringify({latest,qualifyingTransfers:observed.length,distinctParticipants:owners.size,top}));
+ console.log('ACTIVE_DISCOVERY_RESULT',JSON.stringify({latest,qualifyingTransfers:observed.length,distinctParticipants:owners.size,biggest,top}));
 }finally{await client.close();}
