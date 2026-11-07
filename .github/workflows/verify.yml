@@ -1,0 +1,42 @@
+name: Whale Watching Agent — tests, build, and live Pharos MCP
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  unit-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Five wallet validation, thresholds, transfer reports, position snapshots and authentication
+        run: npm test
+      - name: Cloudflare Worker dry-run
+        run: npm run build
+  live-chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Check five public Mainnet addresses via official hosted Chain MCP
+        run: npm run smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pharos-whale-watch-live-chain-proof
+          path: proof/live-mcp-evidence.json
+          retention-days: 30
+          if-no-files-found: warn
