@@ -23,7 +23,7 @@ export const DEFAULT_CONFIG={
  thresholds:{USDC:'1000',WPROS:'1000',WETH:'1',R25:'5',ZONA:'1000'}
 };
 const ERC20=new Interface(['function balanceOf(address) view returns(uint256)']);
-const RESERVE=new Interface(['function getReserveData(address) view returns(tuple(uint256 configuration,uint128 liquidityIndex,uint128 currentLiquidityRate,uint128 variableBorrowIndex,uint128 currentVariableBorrowRate,uint128 currentStableBorrowRate,uint128 currentStableBorrowRateUnused,uint40 lastUpdateTimestamp,uint16 id,address aTokenAddress,address stableDebtTokenAddress,address variableDebtTokenAddress,address interestRateStrategyAddress,uint128 accruedToTreasury,uint128 unbacked,uint128 isolationModeTotalDebt))']);
+const RESERVE=new Interface(['function getReserveData(address) view returns(tuple(uint256 configuration,uint128 liquidityIndex,uint128 currentLiquidityRate,uint128 variableBorrowIndex,uint128 currentVariableBorrowRate,uint128 currentStableBorrowRate,uint40 lastUpdateTimestamp,uint16 id,address aTokenAddress,address stableDebtTokenAddress,address variableDebtTokenAddress,address interestRateStrategyAddress,uint128 accruedToTreasury,uint128 unbacked,uint128 isolationModeTotalDebt))']);
 const SYMBOL_DECIMALS={USDC:6,WPROS:18,WETH:18,R25:18,ZONA:6};
 export function validateConfig(input){
  if(!input||!Array.isArray(input.addresses)||input.addresses.length<5||input.addresses.length>6)
