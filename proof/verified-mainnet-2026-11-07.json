@@ -1,0 +1,91 @@
+{
+  "schema": "pharos-whale-watching-agent-production-proof-v2",
+  "verifiedAtUtc": "2026-11-07T09:25:40Z",
+  "site": "https://whale-watching-agent.trantanlong2411.workers.dev/",
+  "repository": "https://github.com/trantanlong2411-droid/Whale-Watching-Agent",
+  "ci": {
+    "testsBuildLiveMcp": "https://github.com/trantanlong2411-droid/Whale-Watching-Agent/actions/runs/42359728573",
+    "deployedProduction": "https://github.com/trantanlong2411-droid/Whale-Watching-Agent/actions/runs/42359728542",
+    "realActiveAddressDiscovery": "https://github.com/trantanlong2411-droid/Whale-Watching-Agent/actions/runs/42359474217"
+  },
+  "network": "Pharos Mainnet",
+  "chainId": 1672,
+  "source": "Official hosted Pharos Chain MCP",
+  "version": "whale-watching-pharos-2026-11-07-v2",
+  "verifiedPublicDemo": {
+    "configuredAddresses": 5,
+    "names": [
+      "Active participant 01",
+      "Active participant 02",
+      "Active participant 03",
+      "Active participant 04",
+      "Active participant 05"
+    ],
+    "addresses": [
+      "0x912c9aDe24D44d8922f0866D8Dcb079f1363f647",
+      "0x936564245B69f5a293b42cbd752E0eE3bb68b470",
+      "0x1F3546a29EeC2102c8d52E21a45114124014c85C",
+      "0x08d1a2dD7C28E4079b7B2efbe0426596F14bB97F",
+      "0x88808D768B8bE6a0F2Ff6C903B23Fe3ccc01e67B"
+    ],
+    "thresholdsTokenUnits": {
+      "USDC": 50,
+      "WPROS": 100,
+      "WETH": 1,
+      "R25_shares": 5,
+      "Zona_aTokens": 1000
+    },
+    "currentScan": {
+      "fromBlock": 22363258,
+      "toBlock": 22364257,
+      "logFiltersSucceeded": 6,
+      "chainHead": 22364257
+    },
+    "observedSignificantEventsInPublicFeed": 75,
+    "tokenAndPositionBalancesRead": 25,
+    "publicReadAccessVerified": true,
+    "privateTokenRequiredForEdits": true,
+    "authenticatedEditWithDifferentUSDCThresholdVerified": true,
+    "autoAlarmConfiguredEverySeconds": 120,
+    "automaticAlarmFiringSeparatelyProved": false
+  },
+  "independentLiveProof": {
+    "latestBlock": 22364259,
+    "scannedRange": {
+      "fromBlock": 22363260,
+      "toBlock": 22364259
+    },
+    "logFiltersSucceeded": 6,
+    "observedAddressLevelEvents": 135,
+    "tokenAndPositionBalancesRead": 25,
+    "providerWarnings": [],
+    "note": "Event count refers to address-level observations from a <=1000-block sample; a transfer between two watched wallets can produce incoming and outgoing entries."
+  },
+  "examples": [
+    {
+      "token": "USDC",
+      "amount": "53.557756",
+      "fromLabel": "Active participant 03",
+      "toLabel": "Active participant 01",
+      "hash": "0x6045c34343452921a361951218a52cdc06e2b5392a909f93be794714f3aa4de2",
+      "blockNumber": 22363261,
+      "link": "https://pharosscan.xyz/tx/0x6045c34343452921a361951218a52cdc06e2b5392a909f93be794714f3aa4de2"
+    },
+    {
+      "token": "WPROS",
+      "amount": "425.95977301362671616",
+      "hash": "0xe10b8f4331496da0a365051ff89a626eca5bab3c0da82676a12212d7a2a30c8d",
+      "blockNumber": 22363665,
+      "link": "https://pharosscan.xyz/tx/0xe10b8f4331496da0a365051ff89a626eca5bab3c0da82676a12212d7a2a30c8d"
+    }
+  ],
+  "limitations": [
+    "Addresses were selected from verified public token-transfer logs; wallet owner identities and wealth have not been determined.",
+    "Alerts observe only USDC, WPROS, WETH ERC-20 Transfer events and optional R25/Zona position balance snapshots.",
+    "The demo threshold is illustrative and not a proof of unusually large economic value or illicit activity.",
+    "Starts from a recent 1000-block window, not a full historical index; later alarms advance by up to 1000 blocks per poll.",
+    "Balance snapshots may show position changes without identifying their causative transactions.",
+    "No real-money actions, signatures, trading, private keys or API secrets.",
+    "Repeated Cloudflare alarms are configured and unit-tested, but this production proof does not independently time a later autonomous wake-up."
+  ]
+}
