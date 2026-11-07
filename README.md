@@ -78,7 +78,7 @@ npm run smoke         # Actual read-only Chain MCP snapshot, no transactions
 npx wrangler deploy   # Publish to Cloudflare
 ```
 
-On Cloudflare Workers & Pages, link the repository `trantanlong2411-droid/Whale-Watching-Agent` on branch `main`, project root `/`, deploy command `npx wrangler deploy`, and expected Worker name `whale-watching-agent`. `wrangler.jsonc` automatically provisions the SQLite-backed Durable Object `WhaleWatchlist` with the `v1` migration. After deployment, `GET /api/health` should show `whale-watching-pharos-2026-11-07-v1`.
+On Cloudflare Workers & Pages, link the repository `trantanlong2411-droid/Whale-Watching-Agent` on branch `main`, project root `/`, deploy command `npx wrangler deploy`, and expected Worker name `whale-watching-agent`. `wrangler.jsonc` automatically provisions the SQLite-backed Durable Object `WhaleWatchlist` with the `v1` migration. After deployment, `GET /api/health` should show `whale-watching-pharos-2026-11-07-v2`.
 
 ## Important limitations
 

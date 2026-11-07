@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 const base=(process.env.WORKER_URL||'https://whale-watching-agent.trantanlong2411.workers.dev').replace(/\/$/,'');
-const version='whale-watching-pharos-2026-11-07-v1';
+const version='whale-watching-pharos-2026-11-07-v2';
 async function request(path,method='GET',body,token){
  const res=await fetch(base+path,{method,headers:{
   ...(body?{'content-type':'application/json'}:{}),...(token?{authorization:'Bearer '+token}:{})},
@@ -24,6 +24,10 @@ assert.equal(health.data.maxWatchAddresses,6);
 let demo=await request('/api/watch/demo');
 assert.equal(demo.status,200,JSON.stringify(demo.data).slice(0,350));
 assert.equal(demo.data.config.addresses.length,5);
+assert.equal(demo.data.config.addresses[0].address.toLowerCase(),
+ '0x912c9ade24d44d8922f0866d8dcb079f1363f647','Production must use active demo seed v2');
+assert.equal(demo.data.config.thresholds.USDC,'50.0');
+assert.equal(demo.data.config.thresholds.WPROS,'100.0');
 assert.equal(Object.keys(demo.data.config.thresholds).length,5);
 let result=await request('/api/watch/demo/refresh','POST',{});
 if(result.status!==200&&result.status!==503)throw Error('Manual refresh wrong status: '+JSON.stringify(result.data));
@@ -40,6 +44,10 @@ assert.equal(data.last.filtersSucceeded,6);
 assert.ok(data.last.scannedRange.toBlock>=data.last.scannedRange.fromBlock);
 assert.ok(data.last.scannedRange.toBlock-data.last.scannedRange.fromBlock<1000);
 assert.equal(data.summary.monitoredAddresses,5);
+const ranges=[data.last.scannedRange];
+const verifiedBlock=22363879;
+if(ranges.some(r=>r.fromBlock<=verifiedBlock&&r.toBlock>=verifiedBlock))
+ assert.ok(data.events.length>0,'Known real WPROS transfer at block 22363879 should be in the monitored feed');
 const template=await request('/api/config-template');
 assert.equal(template.status,200);
 const invalid=await request('/api/watch/create','POST',{config:{...template.data.config,addresses:template.data.config.addresses.slice(0,4)}});
@@ -67,6 +75,6 @@ console.log('WHALE_WATCHER_PRODUCTION_VERIFIED',JSON.stringify({
  realScannedRange:data.last.scannedRange,chainHead:data.last.latestBlock,
  logFiltersSucceeded:data.last.filtersSucceeded,
  monitoredPositionBalanceRead:data.last.tokenBalancesRead,
- observedSignificantEvents:data.events.length,
+ observedSignificantEvents:data.events.length,knownTransferCheckPossible:data.last.scannedRange.fromBlock<=22363879&&data.last.scannedRange.toBlock>=22363879,
  privateConfigEditable:true,publicWatchlistReadable:true,permissionGuard:true,
  newPersonalWatchlistUrl:created.data.publicUrl,simulatedWhales:false}));

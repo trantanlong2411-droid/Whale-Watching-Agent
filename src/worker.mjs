@@ -2,7 +2,7 @@ import {WhaleWatchlist} from './store.mjs';
 import {validateConfig,DEFAULT_CONFIG,TOKENS} from './analysis.mjs';
 import {HTML} from './page.mjs';
 export {WhaleWatchlist};
-export const VERSION='whale-watching-pharos-2026-11-07-v1';
+export const VERSION='whale-watching-pharos-2026-11-07-v2';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'cache-control':'no-store','x-content-type-options':'nosniff'}});
 function idOK(id){return id==='demo'||/^[0-9a-f]{8}-[0-9a-f-]{27}$/.test(id)}
 function store(env,id){
