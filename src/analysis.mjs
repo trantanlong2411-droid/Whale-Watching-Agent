@@ -14,13 +14,13 @@ export const PROTOCOLS={
 export const TOPIC=id('Transfer(address,address,uint256)');
 export const DEFAULT_CONFIG={
  addresses:[
-  {address:'0xa55170cd156ca6dafd0b1ee3de87f3161799ad4c',label:'Public swap participant'},
-  {address:'0xfaC0718D882E5f07e1972D617bd430CD72A55D84',label:'Public example wallet'},
-  {address:'0x1c2bc8b553d9a7e61f7531a3a4bf2162f4569268',label:'R25 vault contract'},
-  {address:'0xda464e68208A3083Eb65FE5c522a72AeD1C1372a',label:'Zona lending contract'},
-  {address:'0xc879c018db60520f4355c26ed1a6d572cdac1815',label:'USDC token contract'}
+  {address:'0x912c9aDe24D44d8922f0866D8Dcb079f1363f647',label:'Active participant 01'},
+  {address:'0x936564245B69f5a293b42cbd752E0eE3bb68b470',label:'Active participant 02'},
+  {address:'0x1F3546a29EeC2102c8d52E21a45114124014c85C',label:'Active participant 03'},
+  {address:'0x08d1a2dD7C28E4079b7B2efbe0426596F14bB97F',label:'Active participant 04'},
+  {address:'0x88808D768B8bE6a0F2Ff6C903B23Fe3ccc01e67B',label:'Active participant 05'}
  ],
- thresholds:{USDC:'1000',WPROS:'1000',WETH:'1',R25:'5',ZONA:'1000'}
+ thresholds:{USDC:'50',WPROS:'100',WETH:'1',R25:'5',ZONA:'1000'}
 };
 const ERC20=new Interface(['function balanceOf(address) view returns(uint256)']);
 const RESERVE=new Interface(['function getReserveData(address) view returns(tuple(uint256 configuration,uint128 liquidityIndex,uint128 currentLiquidityRate,uint128 variableBorrowIndex,uint128 currentVariableBorrowRate,uint128 currentStableBorrowRate,uint40 lastUpdateTimestamp,uint16 id,address aTokenAddress,address stableDebtTokenAddress,address variableDebtTokenAddress,address interestRateStrategyAddress,uint128 accruedToTreasury,uint128 unbacked,uint128 isolationModeTotalDebt))']);

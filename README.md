@@ -26,19 +26,23 @@ An autonomous, persistent, **read-only Pharos Mainnet (chain ID 1672)** address 
 5. The dashboard makes an important distinction: token transfers are tied to **actual transaction hashes**, while R25/Zona position observations are **snapshots, not transaction-level deposit/withdraw proofs**. It does not invent a reason for any change or assert that a whale is manipulating markets.
 6. In the event of an MCP log RPC failure, the scheduler records the failure and **does not advance the persisted block cursor**. It retries subsequently. If an optional token or protocol balance is unavailable, the warning is shown and the missing result is not treated as zero.
 
-### Demo watchlist
+### Demo watchlist: five on-chain-observed active addresses
 
-The demo monitors **five known Pharos addresses**; the terms "whale" and "significant" are task labels, not accusations of suspicious activity. Some defaults are **protocol contracts**, not personal wallets.
+The demo has five **public addresses discovered from actual recent USDC and WPROS transfers** on Pharos. This does **not** establish that the addresses belong to whales, an individual, a named organization, or suspicious actors.
 
-| Example label | Public address |
+| Display label | Verified public address |
 | --- | --- |
-| Public swap participant | `0xa55170cd156ca6dafd0b1ee3de87f3161799ad4c` |
-| Public example wallet | `0xfaC0718D882E5f07e1972D617bd430CD72A55D84` |
-| R25 vault contract | `0x1c2bc8b553d9a7e61f7531a3a4bf2162f4569268` |
-| Zona lending contract | `0xda464e68208A3083Eb65FE5c522a72AeD1C1372a` |
-| USDC token contract | `0xc879c018db60520f4355c26ed1a6d572cdac1815` |
+| Active participant 01 | `0x912c9aDe24D44d8922f0866D8Dcb079f1363f647` |
+| Active participant 02 | `0x936564245B69f5a293b42cbd752E0eE3bb68b470` |
+| Active participant 03 | `0x1F3546a29EeC2102c8d52E21a45114124014c85C` |
+| Active participant 04 | `0x08d1a2dD7C28E4079b7B2efbe0426596F14bB97F` |
+| Active participant 05 | `0x88808D768B8bE6a0F2Ff6C903B23Fe3ccc01e67B` |
 
-Default thresholds: **1000 USDC**, **1000 WPROS**, **1 WETH**, **5 R25 shares**, **1000 Zona aTokens**. These are task demonstration values, not regulatory or economic risk thresholds.
+Known real proof examples from the event discovery run: [425.959773 WPROS transfer](https://pharosscan.xyz/tx/0xe10b8f4331496da0a365051ff89a626eca5bab3c0da82676a12212d7a2a30c8d) at block 22,363,665 and [250 USDC transfer](https://pharosscan.xyz/tx/0x3179cea75b3b353636a0275e56742c482d317c0bd7b41e6881916f1ba4eb5c16) at block 22,363,323.
+
+Default **demo-sensitivity thresholds** are **50 USDC**, **100 WPROS**, **1 WETH**, **5 R25 shares** and **1000 Zona aTokens**. These are illustrative token-unit thresholds chosen so reviewers can observe real activity near deployment. They are *not* economically validated whale thresholds; users should configure thresholds appropriate to their own monitoring goals.
+
+Demo seed version 2 resets the old inactive example set once on deployment, so the first scan starts on a recent 1000-block window with these verified participants. This does not backfill the wallet's full history.
 
 ## How to review
 

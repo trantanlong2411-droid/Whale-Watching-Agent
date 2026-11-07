@@ -30,7 +30,7 @@ A second read-only step checks 3 spot token balances plus 1 R25 vault share bala
 
 ## Trust, privacy, and security
 
-The dashboard's public demo has five verified public addresses (including protocol contracts) and cannot be publicly edited. A personal list is stored in its own Durable Object ID, with a cryptographically random private editing token. Only the hash of the token is persisted; the secret is returned once and retained in the browser's sessionStorage (never in the public share URL). Read-only states are public for reviewer access. Input size, frequency and address counts are capped.
+The dashboard's public demo has five public addresses selected from verified recent token transfer logs and cannot be publicly edited. A personal list is stored in its own Durable Object ID, with a cryptographically random private editing token. Only the hash of the token is persisted; the secret is returned once and retained in the browser's sessionStorage (never in the public share URL). Read-only states are public for reviewer access. Input size, frequency and address counts are capped.
 
 No API key or wallet connection is required, no blockchain write tools are called, and there is no user authorization to make trades. Token thresholds are parsed into exact big integers. Unknown contracts and failed balance calls are explicit warnings rather than synthetic zero balances.
 
@@ -41,7 +41,7 @@ No API key or wallet connection is required, no blockchain write tools are calle
 - **Cloudflare state:** durable alarm cursor, auth and capped alert history; periodic alarms are best-effort and not a real-time SLA.
 - **Absent sources:** no USD price feeds, full chain index, internal traces, mempool or external exchange accounts.
 
-A deterministic high-value transfer test is a local fixture; it must never be passed off as an actual Pharos whale event. Only live Chain MCP data and verified on-chain links may appear in the deployed feed.
+The example participant addresses are drawn from actual recent Mainnet USDC/WPROS transfers, but this alone cannot establish the identity or wealth of their owners. A deterministic high-value transfer test is a local fixture; it must never be passed off as an actual Pharos whale event. Only live Chain MCP data and verified on-chain links may appear in the deployed feed.
 
 ## Reviewer evidence
 

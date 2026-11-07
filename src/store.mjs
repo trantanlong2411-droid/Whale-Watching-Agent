@@ -8,12 +8,21 @@ async function hashToken(token){
 export class WhaleWatchlist {
  constructor(ctx,env){this.ctx=ctx;this.env=env;this.collector=env?.TEST_COLLECTOR||collect;}
  async seeded(){
-  if(await this.ctx.storage.get('config'))return;
+  const configNow=await this.ctx.storage.get('config');
+  const isDemo=await this.ctx.storage.get('demo');
+  const demoVersion=await this.ctx.storage.get('demoSeedVersion')||0;
+  // Demo is read-only, so a version upgrade can safely replace obsolete
+  // inactive sample addresses and restart its monitored cursor.
+  if(configNow && (!isDemo || demoVersion>=2))return;
   const config=validateConfig(DEFAULT_CONFIG);
   await this.ctx.storage.put('config',config);
   await this.ctx.storage.put('demo',true);
+  await this.ctx.storage.put('demoSeedVersion',2);
   await this.ctx.storage.put('events',[]);
   await this.ctx.storage.put('cursor',null);
+  await this.ctx.storage.put('started',0);
+  await this.ctx.storage.delete('balances');
+  await this.ctx.storage.delete('last');
   await this.ctx.storage.setAlarm(Date.now()+1000);
  }
  async state(){

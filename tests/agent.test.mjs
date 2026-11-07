@@ -17,8 +17,9 @@ const transfer=(from,to,amount,block=22360000,logIndex='0x1')=>({
 const erc20=new Interface(['function balanceOf(address) view returns(uint256)']);
 test('five configurable independent addresses, thresholds and validation',()=>{
  assert.equal(config.addresses.length,5);
- assert.equal(config.thresholds.USDC,'1000.0');
+ assert.equal(config.thresholds.USDC,'50.0');
  assert.equal(config.thresholds.WETH,'1.0');
+ assert.equal(config.thresholds.WPROS,'100.0');
  assert.throws(()=>validateConfig({...config,addresses:config.addresses.slice(0,4)}),/5 or 6/);
  assert.throws(()=>validateConfig({...config,addresses:[...config.addresses.slice(0,4),config.addresses[0]]}),/unique/);
  assert.throws(()=>validateConfig({...config,thresholds:{...config.thresholds,USDC:'-1'}}),/threshold/);

@@ -4,7 +4,7 @@
 
 | Scoring criterion | Actual implementation |
 | --- | --- |
-| At least 5 configurable addresses | Demo seeds 5 known real Pharos public addresses; `POST /api/watch/create` creates 5–6 watched addresses; authenticated `POST /api/watch/:id/config` updates labels, addresses and thresholds |
+| At least 5 configurable addresses | Demo seeds 5 recently active, on-chain-verified public transfer participants (identities not inferred); `POST /api/watch/create` creates 5–6 watched addresses; authenticated `POST /api/watch/:id/config` updates labels, addresses and thresholds |
 | Configurable "significant" threshold per token | `validateConfig()` exact integer thresholds for USDC, WPROS, WETH, R25 shares and Zona aTokens; `classifyTransfers` filters only transfers meeting threshold |
 | Clear explanation of what moved, how much and where | Sender, receiver, amount and token from actual Transfer log + known wallet label and explorer transaction link; balance snapshot changes link to protocol contract and explain unknown cause |
 | Summary of recent monitored addresses | 24h observed alerts, category counts, unique on-chain hashes, per-address counts, token volume by direction and historical feed in a public page |
